@@ -1,0 +1,183 @@
+#The text that will show up above the menu
+Menu-Name:
+  1: '&6I am golden, %player_name%!'
+  2: '&aI am green, %player_name%!'
+#The amount of ticks between each title update
+Title-Update-Delay: 40
+
+#The type of the menu. If you want a chest, you can omit this line
+#Other types: hopper, dispenser, dropper, workbench
+Menu-Type: chest
+#If Menu-Type is chest or not set, this specifies the amount of rows
+#Should be a value between 1 and 6 inclusive
+Rows: 4
+
+#The permission required to open this menu
+Permission: some.menu.permission
+#The message to send if the player doesn't have Permission
+Permission-Message: '&cYou are not allowed to open this menu!'
+
+#Menu opener information. If a player clicks with an item that has this data, the menu will open
+#Everything in this part is optional
+Menu-Opener: compass:1:0
+Menu-Opener-Name: '&6Server Selector'
+Menu-Opener-Lore:
+- '&7Pick a server to go to'
+#The slot to put the item in when the player joins (also optional)
+Menu-Opener-Slot: 5
+
+#Should the player open the menu when they join?
+Open-On-Join: yes
+#A sound to play when the menu opens
+#The 1 and 0.5 specify the volume and pitch, respectively (both optional)
+Open-Sound: ui.button.click 1 0.5
+
+#Should this menu not be shown in or openable with /animatedmenu?
+Hide-From-Command: true
+#Custom command to open the menu with. Everything is optional
+Command:
+  Name: selector
+  Usage: '/selector'
+  Description: 'Open the server selector'
+  # When the player types too many arguments, execute a different command instead with the specified arguments
+  Fallback: say
+
+#Global menu click delay the player needs to wait before being able to click again
+Click-Delay: 20
+#Message to send when waiting. You can use {ticksleft}, {secondsleft}, {minutesleft} and {hoursleft]
+Delay-Message: '&cYou need to wait another {ticksleft} ticks for that!'
+
+#Items that should go in the menu. Each new item starts with a dash ( - ) as you can see below
+Items:
+  #Slot, between 1 and the menu's size
+- Slot: 5
+  #Delay between frame updates (when it cycles through animatable stuff like Material, Name, Lore etc.)
+  Frame-Delay: 200
+  #Delay between item refreshes. This could update placeholder values and such
+  Refresh-Delay: 100
+  #The material of this item
+  Material:
+    1: 'wool:1:red'
+    2: 'wool:1:green'
+  #The item name, to display when the item is hovered over
+  Name:
+    1: '&cI am green!'
+    2: '&aI am red!'
+  #The item's lore
+  Lore:
+    1:
+    - '&7Click me before I turn &ared!'
+    2:
+    - '&7Click me before I turn &cgreen!'
+  #The enchantments to apply to the item
+  Enchantments:
+  - 'unbreaking:1'
+  #Hide enchantment names
+  Hide-Flags: enchants
+  #Only show the item when the player has this permission
+  Hide-Permission: some.item.permission
+  #Commands to execute on click
+  Commands:
+  # If you start the command with nothing, the player performs the command
+  # chat: Makes the player chat a message
+  # console: Makes the console perform a command
+  # message: Sends a message to the player
+  # op: Makes the player perform a command as op
+  # broadcast: Broadcasts a message to the server
+  # menu: Makes the player open a menu
+  # give: Gives an item to the player, in format 'id:amount:data [ tag with { as \{ ]'
+  # server: Sends the player to the specified BungeeCord server
+  # tellraw: Sends a /tellraw message to the player
+  # sound: Plays a sound to the player, in format 'sound volume pitch' where volume and pitch are optional
+  - 'message: &7You clicked me, &6%player_name%&7!'
+
+  #X and Y positions are between 1 and the menu's width and height
+- X: 5
+  Y: 2
+  Material:
+    1: leather-chestplate
+    2: skull:1:player
+    3: spawn-egg
+    4: banner
+  Name:
+    1: '&6I am green'
+    2: '&aI am you, &b%player_name%'
+    3: '&2I am a zombie egg'
+    4: '&3Look, I am a banner!'
+
+  #Color for leather armor
+  Color: 00FF00
+  #Skull owner. Only applies when material is skull with data value 3
+  Skull-Owner: '%player_name%'
+  #The spawn egg type
+  Egg-Type: Zombie
+  #Banner pattern, as generated on https://www.needcoolshoes.com/banner
+  Banner-Pattern: paaimoet
+
+- X: 5
+  Y: 3
+  Material: diamond-sword:1:1337
+  Name: '&cI am invincible!'
+  #Hides durability bar
+  Unbreakable: yes
+  #Hide the "Unbreakable" text, as well as things as Attack Damage and Speed
+  Hide-Flags: unbreakable, attributes
+  #Specify multiple click handlers
+  Click-Handlers:
+    #Click type. Can be left, right, both, middle, all or a comma-separated list
+  - Click-Type: left
+    Commands:
+    - 'console: kill %player_name%'
+    - 'message: &6You killed yourself!'
+
+  - Click-Type: right
+    #Shift click? Can be yes, no and both
+    Shift-Click: no
+    #Permission required to use this
+    Permission: another.permission
+    Permission-Message: '&cYou are not allowed to do this!'
+    #Vault money required to use this
+    Price: 500
+    Price-Message: '&cYou do not have enough money for this!'
+    #PlayerPoints required to use this
+    Points: 500
+    Points-Message: '&cYou do not have enough points for this!'
+    #Experience required to use this. Without the L, raw exp is used. With L, levels are used
+    Exp: L30
+    Exp-Message: '&cYou need at least 30 experience levels for that!'
+    #Permission makes a player ignore Price, Points and Exp
+    Bypass-Permission: yet.another.permission
+    Commands:
+    - 'console: kill @r[name=!%player_name%]'
+    - 'message: &6You killed a random player!'
+
+  - Click-Type: right
+    Shift-Click: yes
+    Permission: ultra.permission
+    #Delay between clicks
+    Click-Delay: 72000
+    Delay-Message: '&cYou need to wait another {minutesleft}:{secondsleft} seconds for that!'
+    Commands:
+    - 'console: kill @a'
+    - 'message: &6You killed everybody!'
+
+  #You can also put X and Y using a comma in the slot
+- Slot: 5, 4
+  Material: diamond
+  Name: '&bBuy diamonds!'
+  Lore:
+  - '&7Click: &6$100&7 for &b1&7 diamond'
+  - '&7Shift click: &6$6400&7 for &b64&7 diamonds'
+  Click-Handlers:
+  - Shift-Click: no
+    Price: 100
+    Price-Message: '&cYou do not have enough money for that!'
+    Commands:
+    - 'give: diamond:1:0'
+    - '&aYou bought &b1&a diamond!'
+  - Shift-Click: yes
+    Price: 6400
+    Price-Message: '&cYou do not have enough money for that!'
+    Commands:
+    - 'give: diamond:64:0'
+    - 'message: &aYou bought &b64&a diamonds!'
